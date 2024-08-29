@@ -9,6 +9,7 @@ https://github.com/bytedance/bamboo
 
 # 0. DFT 계산용 구조 생성
 Classical MD를 수행하고, 이 중 일부 스냅샷의 랜덤 클러스터를 추출, 이를 데이터로 이용.
+
 클러스터 구조는 .xyz 파일로 추출. 이때 파일명에 클러스터를 구성하는 이온 및 분자들의 이름과 개수가 포함되어 있어야 함. (ex: Frame10_0-7_sub6-0_TFDMP5FSI1.xyz)
 
 # 1. DFT 계산
@@ -16,8 +17,7 @@ DFT 계산 조건: Restricted Kohn-Sham, B3LYP, def2-svpd, Density Fitting, auxi
 1. 계산할 .xyz 파일들과 calc_from_xyzs.py, run_calc_from_xyzs.sh 파일들을 같은 디렉토리에 넣어둔다.
 2. calc_from_xyzs.py 의 ION_LIST를 계산할 시스템에 맞게 적절히 수정한다.
 
-   업로드된 파일은 LiFSI만이 이온인 경우로 저장되어 있다.
-   
+   업로드된 파일은 LiFSI만이 이온인 경우로 저장되어 있다.\n
    이때 ion name은 .xyz파일에서 사용된 이름을 그대로 사용해야하고, ion list에 넣지 않은 물질 명은 중성 분자로 여겨진다.
    
    이를 정확히 입력하지 않을 시, DFT 계산에 오류가 발생할 수 있다.
