@@ -18,7 +18,7 @@ Classical MD를 수행하고, 이 중 일부 스냅샷의 랜덤 클러스터를
 클러스터 구조는 .xyz 파일로 추출. 이때 파일명에 클러스터를 구성하는 이온 및 분자들의 이름과 개수가 포함되어 있어야 함. (ex: Frame10_0-7_sub6-0_TFDMP5FSI1.xyz)
 
 ## 1. DFT 계산
-DFT 계산 조건: Restricted Kohn-Sham, B3LYP, def2-svpd, Density Fitting, auxiliary basis: def2-universal_jkfit
+DFT 계산 조건: Restricted Kohn-Sham, B3LYP, def2-svpd, Density Fitting, auxiliary basis: def2-universal_jkfit, SCF convergence threshold 1.0 10^-10 a.u., maximum iteration 100.
 1. 계산할 .xyz 파일들과 calc_from_xyzs.py, run_calc_from_xyzs.sh 파일들을 같은 디렉토리에 넣어둔다.
 2. calc_from_xyzs.py 의 ION_LIST를 계산할 시스템에 맞게 적절히 수정한다.
 
