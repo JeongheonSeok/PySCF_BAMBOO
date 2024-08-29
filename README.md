@@ -6,6 +6,8 @@ Gong, Sheng, et al. "BAMBOO: a predictive and transferable machine learning forc
 https://github.com/bytedance/bamboo
 
 학습용 DFT 데이터세트는 gpu4pyscf와 pyscf로 생성. ➡ pyscf 및 gpu4pyscf 및 관련 파이썬 패키지는 Linux 환경에서 설치 및 이용 가능. 
+https://github.com/pyscf/pyscf
+https://github.com/pyscf/gpu4pyscf
 
 # 0. DFT 계산용 구조 생성
 Classical MD를 수행하고, 이 중 일부 스냅샷의 랜덤 클러스터를 추출, 이를 데이터로 이용.
