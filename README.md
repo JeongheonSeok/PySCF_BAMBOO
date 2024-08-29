@@ -5,6 +5,9 @@ BAMBOO MLFF model:
 Gong, Sheng, et al. "BAMBOO: a predictive and transferable machine learning force field framework for liquid electrolyte development." arXiv preprint arXiv:2404.07181 (2024). https://arxiv.org/abs/2404.07181
 https://github.com/bytedance/bamboo
 
+Caution!
+해당 코드를 통해 생성한 데이터는 아직은 BAMBOO의 sample data를 완벽히 재현하지 못함. 아마 energy data baseline의 문제로 생각되나, 아직 명확한 해답을 찾지는 못한 상태. 아직은 사용에 주의를 요함. (2024/08/29)
+
 학습용 DFT 데이터세트는 gpu4pyscf와 pyscf로 생성. ➡ pyscf 및 gpu4pyscf 및 관련 파이썬 패키지는 Linux 환경에서 설치 및 이용 가능. 
 https://github.com/pyscf/pyscf
 https://github.com/pyscf/gpu4pyscf
