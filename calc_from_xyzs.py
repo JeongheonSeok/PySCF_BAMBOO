@@ -77,13 +77,15 @@ def calc_from_xyz(file_name):
     mf_GPU.kernel()
     # print(f"0 total energy = {mf_GPU.e_tot}")
     print(file_name," SP time: ",time.time()-st)
-    
+
+    """
     st = time.time()
     molden_fname = file_name[:-4]+'.molden'
     with open(molden_fname, 'w') as f:
         molden.header(mol, f)
         molden.orbital_coeff(mol, f, mf_GPU.mo_coeff, ene=mf_GPU.mo_energy, occ=mf_GPU.mo_occ)
     print(file_name," molden dump time: ",time.time()-st)
+    """
 
     st = time.time()
     gradients = grad.RKS(mf_GPU).kernel()
