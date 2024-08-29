@@ -30,7 +30,9 @@ DFT 계산 조건: Restricted Kohn-Sham, B3LYP, def2-svpd, Density Fitting, auxi
 
 # 2. DFT 계산 결과를 BAMBOO 학습 데이터로 변환
 DFT 계산 결과(.log 파일)들을 모아 .pt 파일로 변환해야 BAMBOO 모델 학습에 이용 가능하다.
+
 log_to_zip.py: 각 cluster들의 DFT 계산 결과를 .pkl 파일에 저장하고, 이들을 모아 zip파일로 압축한다.
+
 pkls_to_tvt.py: 각 cluster들의 정보가 담긴 .pkl파일들을 읽고, 이로부터 BAMBOO 학습용 데이터 .pt 파일을 만든다.
 1. .log 파일들이 있는 폴더에 log_to_zip.py를 넣어둔다.
 2. log_to_zip.py 의 ION_LIST를 계산한 시스템에 맞게 적절히 수정한다. 이는 calc_from_xyzs.py와 동일하다.
