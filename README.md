@@ -9,12 +9,12 @@ https://github.com/bytedance/bamboo
 https://github.com/pyscf/pyscf
 https://github.com/pyscf/gpu4pyscf
 
-# 0. DFT 계산용 구조 생성
+## 0. DFT 계산용 구조 생성
 Classical MD를 수행하고, 이 중 일부 스냅샷의 랜덤 클러스터를 추출, 이를 데이터로 이용.
 
 클러스터 구조는 .xyz 파일로 추출. 이때 파일명에 클러스터를 구성하는 이온 및 분자들의 이름과 개수가 포함되어 있어야 함. (ex: Frame10_0-7_sub6-0_TFDMP5FSI1.xyz)
 
-# 1. DFT 계산
+## 1. DFT 계산
 DFT 계산 조건: Restricted Kohn-Sham, B3LYP, def2-svpd, Density Fitting, auxiliary basis: def2-universal_jkfit
 1. 계산할 .xyz 파일들과 calc_from_xyzs.py, run_calc_from_xyzs.sh 파일들을 같은 디렉토리에 넣어둔다.
 2. calc_from_xyzs.py 의 ION_LIST를 계산할 시스템에 맞게 적절히 수정한다.
@@ -30,7 +30,7 @@ DFT 계산 조건: Restricted Kohn-Sham, B3LYP, def2-svpd, Density Fitting, auxi
 5. 터미널에서 bash ./run_calc_from_xyzs.sh 를 하면 해당 폴더의 모든 xyz파일들에 대해 DFT계산이 이루어진다.
 6. 계산 후에는 .xyz파일명과 동일한 이름의 .log 파일이 생성된다. 해당 파일은 cluster의 energy, gradient, dipole quadrupole moment, ChElPG charge 정보를 포함한다.
 
-# 2. DFT 계산 결과를 BAMBOO 학습 데이터로 변환
+## 2. DFT 계산 결과를 BAMBOO 학습 데이터로 변환
 DFT 계산 결과(.log 파일)들을 모아 .pt 파일로 변환해야 BAMBOO 모델 학습에 이용 가능하다.
 
 log_to_zip.py: 각 cluster들의 DFT 계산 결과를 .pkl 파일에 저장하고, 이들을 모아 zip파일로 압축한다.
@@ -43,7 +43,7 @@ pkls_to_tvt.py: 각 cluster들의 정보가 담긴 .pkl파일들을 읽고, 이�
 5. pkls_to_tvt.py 파일에서 random seed, pkl 파일들이 모인 경로와 BAMBOO 학습용 .pt 파일이 생성될 경로, train val test ratio를 적절히 입력한다.
 6. pkls_to_tvt.py를 실행하면 입력해둔 out_path에 train.pt, val.pt(+test.pt)가 생성된다.
 
-# 3. BAMBOO 모델 학습
+## 3. BAMBOO 모델 학습
 0. BAMBOO 모델을 다운받는다. (https://github.com/bytedance/bamboo)
 1. BAMBOO 폴더에 data 폴더를 만들고, 해당 폴더에 위에서 생성한 train.pt, val.pt 파일을 넣는다.
 2. BAMBOO 폴더 아래의 /configs/train_config/config.json 을 원하는 학습대로 적절히 수정한다.
