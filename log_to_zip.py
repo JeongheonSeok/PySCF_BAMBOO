@@ -25,17 +25,45 @@ from itertools import permutations
 # ION_LIST element: [ion name, charge]
 ION_LIST = [['Li',1], ['FSI',-1]]
 ENERGY_ATOM = {
-    # atom energy in kcal/mol. get with uks.
-    # B3LYP, def2-svpd
-    # get from gpu4pyscf at same condition of cluster computation, with neutral charge and ground state atom's spin
-    # please modify if needed.
-    1: 314.579359001483,    # H
-    3: 4696.89875967814,    # Li
-    6: 23729.2350692135,    # C
-    7: 34223.6684185149,    # N
-    8: 47069.0087892305,    # O
-    9: 62533.2593620080,    # F
-    16: 249750.026058628}   # S
+    # BAMBOO author; Mu ZhenLiang's information.
+    # in Hartree.
+    1: -0.5004938956785162,   # H
+    2: -2.9012748724514967,   # He
+    3: -7.478985306972282,    # Li
+    4: -14.661834274696954,   # Be
+    5: -24.653654806556624,   # B
+    6: -37.782763286104576,   # C
+    7: -54.48354226674843,    # N
+    8: -74.96961419577514,    # O
+    9: -99.73161510485858,    # F
+    10: -128.92519289074954,  # Ne
+    11: -162.23766720181578,  # Na
+    12: -200.02329093220146,  # Mg
+    13: -242.3123918238669,   # Al
+    14: -289.26770687962454,  # Si
+    15: -341.1337984084236,   # P
+    16: -397.97997813506527,  # S
+    17: -460.0658512283677,   # Cl
+    18: -527.436350036388,    # Ar
+    19: -599.8218494548689,   # K
+    20: -677.4588120804531,   # Ca
+    21: -760.4971316009487,   # Sc
+    22: -849.1596725847471,   # Ti
+    23: -943.6254146277051,   # V
+    24: -1044.1113296220058,  # Cr
+    25: -1150.5221511684135,  # Mn
+    26: -1263.3770208466553,  # Fe
+    27: -1382.4595630344677,  # Co
+    28: -1508.0541977393611,  # Ni
+    29: -1640.3216679894867,  # Cu
+    30: -1779.2191706307078,  # Zn
+    31: -1924.6219755997204,  # Ga
+    32: -2076.6814293344805,  # Ge
+    33: -2235.539562658915,   # As
+    34: -2401.212826084795,   # Se
+    35: -2573.8736990611887,  # Br
+    36: -2753.5141929669835   # Kr
+}
 ###############################################################################
 
 HARTREE_TO_KCALPMOL = 627.509474
@@ -49,6 +77,7 @@ ELEMENTS = {
     "Cs": 55, "Ba": 56, "La": 57, "Ce": 58, "Pr": 59, "Nd": 60, "Pm": 61, "Sm": 62, "Eu": 63, "Gd": 64, "Tb": 65, "Dy": 66, "Ho": 67, "Er": 68, "Tm": 69, "Yb": 70, "Lu": 71, "Hf": 72, "Ta": 73, "W": 74, "Re": 75, "Os": 76, "Ir": 77, "Pt": 78, "Au": 79, "Hg": 80, "Tl": 81, "Pb": 82, "Bi": 83, "Po": 84, "At": 85, "Rn": 86,
     "Fr": 87, "Ra": 88, "Ac": 89, "Th": 90, "Pa": 91, "U": 92, "Np": 93, "Pu": 94, "Am": 95, "Cm": 96, "Bk": 97, "Cf": 98, "Es": 99, "Fm": 100, "Md": 101, "No": 102, "Lr": 103, "Rf": 104, "Db": 105, "Sg": 106, "Bh": 107, "Hs": 108, "Mt": 109, "Ds": 110, "Rg": 111, "Cn": 112, "Nh": 113, "Fl": 114, "Mc": 115, "Lv": 116, "Ts": 117, "Og": 118
 }   # made by ChatGPT
+ENERGY_ATOM = {key: value * HARTREE_TO_KCALPMOL for key, value in ENERGY_ATOM.items()}
 
 def total_charge_from_name(setname):
     """
@@ -350,7 +379,7 @@ def edge_from_pos(pos_tensor, set_atom_num, cutoff=5.0):
         edge index information.
 
     """
-    distances = squareform(pdist(pos_tensor.numpy()))
+    distances = squareform(pdist(np.array(pos_tensor)))
     pairs = []
     for i in range(set_atom_num):
         for j in range(i+1, set_atom_num):
@@ -415,7 +444,7 @@ def read_n_make_dict(setname, log_path, xyz_path):
     set_dict['edge_index'] = np.array(edge_from_pos(set_dict['pos'], set_atom_num, cutoff=5.0))    # edges with cutoff radius 5 Angstrom
     set_dict['all_edge_index'] = np.array(get_all_atom_pairs(set_atom_num))
     
-    virial = np.einsum('ij,ik->jk', set_dict['pos'].numpy(), set_dict['forces'].numpy())
+    virial = np.einsum('ij,ik->jk', np.array(set_dict['pos']), np.array(set_dict['forces']))
     set_dict['virial'] = ((virial + virial.T)/2).tolist()
     return set_dict
     
@@ -439,7 +468,8 @@ def zip_pkl_files(directory, output_filename='pkl.zip'):
                     #if os.path.exists(xyz_file_path):
                     #    zipf.write(xyz_file_path, os.path.relpath(xyz_file_path, directory))
                     os.remove(pkl_file_path)
-        zipf.write(error_file_path, os.path.relpath(error_file_path, directory))
+        if os.path.isfile(error_file_path):
+            zipf.write(error_file_path, os.path.relpath(error_file_path, directory))
 
 def process_all_log_files_in_folder(folder_path):
     error_log_path = os.path.join(folder_path, 'error_list.txt')
