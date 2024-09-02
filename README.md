@@ -34,6 +34,8 @@ DFT 계산 조건: Restricted Kohn-Sham, B3LYP, def2-svpd, Density Fitting, auxi
 6. 계산 후에는 .xyz파일명과 동일한 이름의 .log 파일이 생성된다. 해당 파일은 cluster의 energy, gradient, dipole quadrupole moment, ChElPG charge 정보를 포함한다.
 
 ## 2. DFT 계산 결과를 BAMBOO 학습 데이터로 변환
+24/09/02 수정사항: log_to_zip.py 에서 atom reference energy를 github BAMBOO 저자 Mu ZhenLiang에게 받은 값을 이용.
+
 DFT 계산 결과(.log 파일)들을 모아 .pt 파일로 변환해야 BAMBOO 모델 학습에 이용 가능하다.
 
 log_to_zip.py: 각 cluster들의 DFT 계산 결과를 .pkl 파일에 저장하고, 이들을 모아 zip파일로 압축한다.
