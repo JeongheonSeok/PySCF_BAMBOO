@@ -28,7 +28,7 @@ DFT 계산 조건: Restricted Kohn-Sham, B3LYP, def2-svpd, Density Fitting, auxi
    
    이를 정확히 입력하지 않을 시, DFT 계산에 오류가 발생할 수 있다.
    
-   만약 파동함수 정보까지 얻고 싶다면, 81번 line에 주석 처리된 부분을 주석 해제하여 .molden 파일이 생성되도록 할 수 있다.
+   만약 파동함수 정보까지 얻고 싶다면, 81번 line 주석 처리된 부분을 주석 해제하여 .molden 파일이 생성되도록 할 수 있다.
 4. run_calc_from_xyzs.sh를 사용 환경에 맞게 적절히 수정한다. 해당 파일에는 가장 기본적인 내용만이 포함되어 있다.
 5. 터미널에서 bash ./run_calc_from_xyzs.sh 를 하면 해당 폴더의 모든 xyz파일들에 대해 DFT계산이 이루어진다.
 6. 계산 후에는 .xyz파일명과 동일한 이름의 .log 파일이 생성된다. 해당 파일은 cluster의 energy, gradient, dipole quadrupole moment, ChElPG charge 정보를 포함한다.
