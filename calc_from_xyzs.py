@@ -12,7 +12,7 @@ B3LYP, def2-svpd. The input cluster is assumed to have no unpaired electrons.
 import pyscf
 from gpu4pyscf import grad
 from gpu4pyscf.dft import rks
-from pyscf.tools import molden
+# from pyscf.tools import molden
 from gpu4pyscf.qmmm import chelpg
 import time
 from datetime import datetime
@@ -77,7 +77,7 @@ def calc_from_xyz(file_name):
     mf_GPU.kernel()
     # print(f"0 total energy = {mf_GPU.e_tot}")
     print(file_name," SP time: ",time.time()-st)
-
+    
     """
     st = time.time()
     molden_fname = file_name[:-4]+'.molden'
