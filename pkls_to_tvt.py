@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Created on Tue Aug 25 15:47:00 2024
@@ -13,6 +14,7 @@ import torch
 import os
 import random
 from tqdm import tqdm
+import gc
 
 ###############################################################################
 random.seed(42)
@@ -20,6 +22,7 @@ files_path = './DET'
 out_path = './sorted_pts'
 (train, val, test) = (9, 1, 0)
 ###############################################################################
+GARBAGE_COLLECTION_PERIOD = 5000
 
 def list_pkl_files(folder_path):
     """
@@ -109,6 +112,7 @@ def merge_to_one_dict(files):
         merged one dictionary.
 
     """
+    gc_idx = 0
     if len(files) == 0: raise ValueError("no files to merge")
     with open(files.pop(0), 'rb') as f:
         cluster_dict = pickle.load(f)
@@ -167,6 +171,12 @@ def merge_to_one_dict(files):
         cs_atom += cluster_atom_num
         cs_edge += len(cluster_dict['edge_index'])
         cs_all_edge += len(cluster_dict['all_edge_index'])
+        
+    # delete finished custer_dict
+        del cluster_dict
+        gc_idx += 1
+        if gc_idx % GARBAGE_COLLECTION_PERIOD == 0:
+            gc.collect()
     
 # 'cumsum_atom' add
     file_dict['cumsum_atom'].append(cs_atom)
