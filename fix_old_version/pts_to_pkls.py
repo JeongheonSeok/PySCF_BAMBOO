@@ -103,7 +103,7 @@ def ptdict_to_pkldict(ptdir):
     
     energy = pkldict['energy']
     for atom in pkldict['atom_types']:
-        energy += ENERGY_ATOM[atom]
+        energy -= ENERGY_ATOM[atom]
     pkldict['energy'] = energy
     
     return pkldict
