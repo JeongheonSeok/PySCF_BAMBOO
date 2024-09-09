@@ -134,7 +134,7 @@ def energy_from_logfile(log_path, atom_types, first_line):
     if match:
         energy = float(match.group(1)) * HARTREE_TO_KCALPMOL
         for atom in atom_types:
-            energy += ENERGY_ATOM[atom]
+            energy -= ENERGY_ATOM[atom]
         return energy
     else:
         raise ValueError("Energy section not found in "+log_path)
