@@ -79,7 +79,10 @@ def split_list_by_ratio(lst, ratios):
 
     random.shuffle(lst)
     total_ratio = sum(ratios)
-    lengths = [int(len(lst) * (ratio / total_ratio)) for ratio in ratios]
+    lst_len = len(lst)
+    lengths = [int(len_lst * (ratio / total_ratio)) for ratio in ratios]
+    remain_len = lst_len - sum(lengths)
+    lengths[0] += remain_len
     
     split_lists = []
     current_index = 0
