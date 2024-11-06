@@ -7,6 +7,7 @@ $!/bin/bash
 # run this file:
 #	bash ./run_calc_from_xyzs.sh
 
-for xyz in "$1"/*.xyz ; do
+#for xyz in "$1"/*.xyz ; do
+for xyz in ./*.xyz ; do
     ./calc_from_xyzs.py "$xyz"
 done
