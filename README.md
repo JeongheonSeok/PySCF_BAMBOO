@@ -39,7 +39,7 @@ bash ./run_calc_from_xyzs.sh
 ```
 5. After the calculation, a .log file with the same name as the .xyz files are created. That file contains information about the energy, gradient, dipole moment, quadrupole moment, and ChElPG charge of the cluster.
 
-## 2. DFT 계산 결과를 BAMBOO 학습 데이터로 변환
+## 2. Convert DFT computation result to BAMBOO training data
 24/09/02 Changes: In log_to_zip.py, the atom reference energy is used as the value received from Mu ZhenLiang, author of BAMBOO on GitHub.
 
 Training and validation of the BAMBOO model requires collecting DFT calculation results (.log files) and converting them into .pt files.
