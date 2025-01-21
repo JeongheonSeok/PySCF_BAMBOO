@@ -1,4 +1,4 @@
-$!/bin/bash
+#!/bin/bash
 
 # to manage pyscf's memory, restart python kernel for every calculations.
 # place run_calc_from_xyzs.sh, calc_from_xyzs.py, .xyz files in same directory
